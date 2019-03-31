@@ -10,7 +10,11 @@
     >
       <ul>
         <li class="serach-item border-bottom"
-            v-for="(item, index) of list" :key="index">{{item.name}}
+            v-for="(item, index) of list" 
+            :key="index"
+            @click="handleCityClick(item.name)"
+        >
+          {{item.name}}
         </li>
         <li class="serach-item border-bottom" v-show="hasNoData">
           没有找到匹配数据
@@ -60,6 +64,12 @@ export default {
         }
         this.list = result
       },100)
+    }
+  },
+  methods: {
+    handleCityClick (city) {
+      this.$store.commit('changeCity', city)
+      this.$router.push('/')
     }
   },
   mounted () {
